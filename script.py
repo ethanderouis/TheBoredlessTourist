@@ -60,8 +60,24 @@ def find_attractions(destination, interests):
         attraction_tags = possible_attraction[1]
         for interest in interests:
             if interest in attraction_tags:
-                attractions_with_interest.append(possible_attraction[0])
+                attractions_with_interest.append(possible_attraction[0]) # 0 index just returns the attraction not its description
     return attractions_with_interest
 
-la_arts = find_attractions("Los Angeles, USA", ["art"]) # prints [['LACMA', ['art', 'museum']]]
-print(la_arts)
+la_arts = find_attractions("Los Angeles, USA", ["art"]) 
+print(la_arts)# ['LACMA']
+
+# SEE THE PARTS OF A CITY YOU WANT TO SEE
+def get_attractions_for_traveler(traveler):
+    traveler_destination = traveler[1]
+    traveler_interests = traveler[2]
+
+    traveler_attractions = find_attractions(traveler_destination, traveler_interests)
+    
+    interests_string = "Hi " + traveler[0] + ", we think you'll like these places around " + traveler_destination + " which are"
+    
+    for attraction in traveler_attractions:
+        interests_string += ", " + attraction
+
+    return interests_string
+
+print(get_attractions_for_traveler(['Dereck Smill', 'Paris, France', ['monument']]))
